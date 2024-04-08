@@ -2,6 +2,8 @@ package com.abhinavgpt.fakestorespring.services;
 
 import com.abhinavgpt.fakestorespring.dtos.CartRecieveDTO;
 import com.abhinavgpt.fakestorespring.dtos.ProductCartDTO;
+import com.abhinavgpt.fakestorespring.exceptions.CartNotFoundException;
+import com.abhinavgpt.fakestorespring.exceptions.ProductNotFoundException;
 import com.abhinavgpt.fakestorespring.models.Cart;
 import com.abhinavgpt.fakestorespring.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,16 +28,21 @@ public class CartServiceImpl implements  CartService{
         this.productService = productService;
     }
 
-    private Cart mapToCart(CartRecieveDTO cartRecieveDTO) {
+    private Cart mapToCart(CartRecieveDTO cartRecieveDTO)  {
         List<Product> products = mapToProduct(cartRecieveDTO.products());
         return new Cart(cartRecieveDTO.id(), cartRecieveDTO.userId(), cartRecieveDTO.date(), products);
     }
 
-    private List<Product> mapToProduct(List<ProductCartDTO> products) {
+    private List<Product> mapToProduct(List<ProductCartDTO> products){
         List<Product> productList = new ArrayList<>();
 
         for(ProductCartDTO productCartDTO : products) {
-            Product product = productService.getProduct(productCartDTO.productId());
+            Product product = null;
+            try {
+                product = productService.getProduct(productCartDTO.productId());
+            } catch (ProductNotFoundException e) {
+                throw new RuntimeException(e);
+            }
             productList.add(product);
         }
 
@@ -59,11 +66,13 @@ public class CartServiceImpl implements  CartService{
     }
 
     @Override
-    public Cart getCart(long id) {
+    public Cart getCart(long id) throws CartNotFoundException {
 
         CartRecieveDTO cartRecieveDTO = restTemplate.getForObject(url + "/" + id, CartRecieveDTO.class);
 
-        assert cartRecieveDTO != null;
+        if(cartRecieveDTO == null) {
+            throw new CartNotFoundException("Cart with id " + id + " not found.");
+        }
 
         return mapToCart(cartRecieveDTO);
     }

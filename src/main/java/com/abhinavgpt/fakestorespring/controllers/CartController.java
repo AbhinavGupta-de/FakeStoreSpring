@@ -1,5 +1,6 @@
 package com.abhinavgpt.fakestorespring.controllers;
 
+import com.abhinavgpt.fakestorespring.exceptions.CartNotFoundException;
 import com.abhinavgpt.fakestorespring.models.Cart;
 import com.abhinavgpt.fakestorespring.services.CartService;
 import jakarta.websocket.server.PathParam;
@@ -23,7 +24,7 @@ public class CartController {
     }
 
     @GetMapping("/{id}")
-    public Cart getCart(@PathVariable("id") Long id){
+    public Cart getCart(@PathVariable("id") Long id) throws CartNotFoundException {
         return cartService.getCart(id);
     }
 

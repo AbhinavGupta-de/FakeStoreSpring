@@ -1,5 +1,6 @@
 package com.abhinavgpt.fakestorespring.controllers;
 
+import com.abhinavgpt.fakestorespring.exceptions.ProductNotFoundException;
 import com.abhinavgpt.fakestorespring.models.Product;
 import com.abhinavgpt.fakestorespring.services.ProductService;
 import org.springframework.web.bind.annotation.*;
@@ -7,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/products")
+@RequestMapping("/products")
 public class ProductController {
 
     private final ProductService productService;
@@ -16,7 +17,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public List<Product> getAllProducts() {
         return productService.getProducts();
     }
@@ -37,12 +38,12 @@ public class ProductController {
     }
 
     @GetMapping("/category/{categoryName}")
-    public List<Product> getProductsByCategory(@PathVariable String categoryName) {
+    public List<Product> getProductsByCategory(@PathVariable String categoryName) throws ProductNotFoundException {
         return productService.getProductsByCategory(categoryName);
     }
 
     @GetMapping("/{id}")
-    public Product getProduct(@PathVariable Long id) {
+    public Product getProduct(@PathVariable Long id) throws ProductNotFoundException {
         return productService.getProduct(id);
     }
 

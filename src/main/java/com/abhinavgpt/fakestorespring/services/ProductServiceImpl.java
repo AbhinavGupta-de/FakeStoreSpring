@@ -1,6 +1,7 @@
 package com.abhinavgpt.fakestorespring.services;
 
 import com.abhinavgpt.fakestorespring.dtos.ProductFetchDTO;
+import com.abhinavgpt.fakestorespring.exceptions.ProductNotFoundException;
 import com.abhinavgpt.fakestorespring.models.Category;
 import com.abhinavgpt.fakestorespring.models.Product;
 import org.springframework.core.ParameterizedTypeReference;
@@ -36,11 +37,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getProduct(Long id) {
+    public Product getProduct(Long id) throws ProductNotFoundException {
 
         ProductFetchDTO productFetchDTO = restTemplate.getForObject(url + "/" + id, ProductFetchDTO.class);
 
-        assert productFetchDTO != null;
+        if (productFetchDTO == null) {
+            throw new ProductNotFoundException("Product with id: " + id + " not found");
+        }
 
         return mapToProduct(productFetchDTO);
     }
@@ -76,14 +79,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getProductsByCategory(String categoryName) {
+    public List<Product> getProductsByCategory(String categoryName) throws ProductNotFoundException {
         List<ProductFetchDTO> productFetchDTOS = restTemplate.exchange(
                 url + "/category/" + categoryName,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<List<ProductFetchDTO>>() {}).getBody();
 
-        assert productFetchDTOS != null;
+        if(productFetchDTOS == null) {
+            throw new ProductNotFoundException("Products with category: " + categoryName + " not found");
+        }
 
         return productFetchDTOS.stream().map(this::mapToProduct).toList();
     }

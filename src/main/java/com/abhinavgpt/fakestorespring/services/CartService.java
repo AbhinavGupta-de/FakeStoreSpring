@@ -1,13 +1,15 @@
 package com.abhinavgpt.fakestorespring.services;
+import com.abhinavgpt.fakestorespring.exceptions.CartNotFoundException;
+import com.abhinavgpt.fakestorespring.exceptions.ProductNotFoundException;
 import com.abhinavgpt.fakestorespring.models.Cart;
 
 import java.util.List;
 
 public interface CartService {
 
-    List<Cart> getAllProducts();
+    List<Cart> getAllProducts() ;
 
-    Cart getCart(long id);
+    Cart getCart(long id) throws CartNotFoundException;
 
     List<Cart> limitedCarts(long limit);
 
