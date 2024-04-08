@@ -2,7 +2,6 @@ package com.abhinavgpt.fakestorespring.controllers;
 
 import com.abhinavgpt.fakestorespring.models.Product;
 import com.abhinavgpt.fakestorespring.services.ProductService;
-import jakarta.websocket.server.PathParam;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.List;
 @RequestMapping("/api/products")
 public class ProductController {
 
-    private ProductService productService;
+    private final ProductService productService;
 
     public ProductController(ProductService productService) {
         this.productService = productService;

@@ -1,13 +1,17 @@
 package com.abhinavgpt.fakestorespring.services;
 
 import com.abhinavgpt.fakestorespring.dtos.CartRecieveDTO;
+import com.abhinavgpt.fakestorespring.dtos.ProductCartDTO;
 import com.abhinavgpt.fakestorespring.models.Cart;
 import com.abhinavgpt.fakestorespring.models.Product;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -16,9 +20,26 @@ public class CartServiceImpl implements  CartService{
     private final String url = "https://fakestoreapi.com/carts";
     private final RestTemplate restTemplate = new RestTemplate();
 
-    private Cart mapToCart(CartRecieveDTO cartRecieveDTO) {
-        return new Cart(cartRecieveDTO.id(), cartRecieveDTO.userId(), cartRecieveDTO.date(), cartRecieveDTO.products());
+    private final ProductService productService;
 
+    public CartServiceImpl(ProductService productService) {
+        this.productService = productService;
+    }
+
+    private Cart mapToCart(CartRecieveDTO cartRecieveDTO) {
+        List<Product> products = mapToProduct(cartRecieveDTO.products());
+        return new Cart(cartRecieveDTO.id(), cartRecieveDTO.userId(), cartRecieveDTO.date(), products);
+    }
+
+    private List<Product> mapToProduct(List<ProductCartDTO> products) {
+        List<Product> productList = new ArrayList<>();
+
+        for(ProductCartDTO productCartDTO : products) {
+            Product product = productService.getProduct(productCartDTO.productId());
+            productList.add(product);
+        }
+
+        return productList;
     }
 
 
@@ -119,9 +140,19 @@ public class CartServiceImpl implements  CartService{
     }
 
     private CartRecieveDTO mapToCardDTO(Cart cart) {
+        List<ProductCartDTO> products = mapToProductDTO(cart.products());
+        return new CartRecieveDTO(cart.id(), cart.userId(), cart.date(), products);
 
-        return new CartRecieveDTO(cart.id(), cart.userId(), cart.date(), cart.products());
+    }
 
+    private List<ProductCartDTO> mapToProductDTO(List<Product> products) {
+        List<ProductCartDTO> productCartDTOList = new ArrayList<>();
+
+        for (Product product : products) {
+            productCartDTOList.add(new ProductCartDTO(product.id(), 1));
+        }
+
+        return productCartDTOList;
     }
 
     @Override
