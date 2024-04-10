@@ -74,9 +74,9 @@ public class CartController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteProduct(@PathVariable("id") long id){
+    public String deleteProduct(@PathVariable("id") long id) {
 
-        try{
+        try {
             cartService.deleteCart(id);
         } catch (Exception e) {
             return "There was an error while deleting the cart";

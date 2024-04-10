@@ -6,18 +6,16 @@ import com.abhinavgpt.fakestorespring.exceptions.CartNotFoundException;
 import com.abhinavgpt.fakestorespring.exceptions.ProductNotFoundException;
 import com.abhinavgpt.fakestorespring.models.Cart;
 import com.abhinavgpt.fakestorespring.models.Product;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @Service
-public class CartServiceImpl implements  CartService{
+public class CartServiceImpl implements CartService {
 
     private final String url = "https://fakestoreapi.com/carts";
     private final RestTemplate restTemplate = new RestTemplate();
@@ -28,15 +26,15 @@ public class CartServiceImpl implements  CartService{
         this.productService = productService;
     }
 
-    private Cart mapToCart(CartRecieveDTO cartRecieveDTO)  {
+    private Cart mapToCart(CartRecieveDTO cartRecieveDTO) {
         List<Product> products = mapToProduct(cartRecieveDTO.products());
         return new Cart(cartRecieveDTO.id(), cartRecieveDTO.userId(), cartRecieveDTO.date(), products);
     }
 
-    private List<Product> mapToProduct(List<ProductCartDTO> products){
+    private List<Product> mapToProduct(List<ProductCartDTO> products) {
         List<Product> productList = new ArrayList<>();
 
-        for(ProductCartDTO productCartDTO : products) {
+        for (ProductCartDTO productCartDTO : products) {
             Product product = null;
             try {
                 product = productService.getProduct(productCartDTO.productId());
@@ -70,7 +68,7 @@ public class CartServiceImpl implements  CartService{
 
         CartRecieveDTO cartRecieveDTO = restTemplate.getForObject(url + "/" + id, CartRecieveDTO.class);
 
-        if(cartRecieveDTO == null) {
+        if (cartRecieveDTO == null) {
             throw new CartNotFoundException("Cart with id " + id + " not found.");
         }
 
@@ -83,7 +81,8 @@ public class CartServiceImpl implements  CartService{
                 url + "?limit=" + limit,
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<List<CartRecieveDTO>>() {}).getBody();
+                new ParameterizedTypeReference<List<CartRecieveDTO>>() {
+                }).getBody();
 
         assert cartFetchDTO != null;
 
@@ -97,7 +96,8 @@ public class CartServiceImpl implements  CartService{
                 url + "?sort=" + order,
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<List<CartRecieveDTO>>() {}).getBody();
+                new ParameterizedTypeReference<List<CartRecieveDTO>>() {
+                }).getBody();
 
         assert cartFetchDTO != null;
 
@@ -112,7 +112,8 @@ public class CartServiceImpl implements  CartService{
                 url + "?startdate=" + start + "&enddate=" + end,
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<List<CartRecieveDTO>>() {}).getBody();
+                new ParameterizedTypeReference<List<CartRecieveDTO>>() {
+                }).getBody();
 
         assert cartFetchDTO != null;
 
@@ -126,7 +127,8 @@ public class CartServiceImpl implements  CartService{
                 url + "/user/" + userId,
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<List<CartRecieveDTO>>() {}).getBody();
+                new ParameterizedTypeReference<List<CartRecieveDTO>>() {
+                }).getBody();
 
         assert cartFetchDTO != null;
 

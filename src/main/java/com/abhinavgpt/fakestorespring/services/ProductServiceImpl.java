@@ -20,11 +20,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getProducts() {
 
-        List<ProductFetchDTO> productFetchDTOS = restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<ProductFetchDTO>>() {}).getBody();
+        List<ProductFetchDTO> productFetchDTOS = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<ProductFetchDTO>>() {
+        }).getBody();
 
         assert productFetchDTOS != null;
 
@@ -33,7 +30,7 @@ public class ProductServiceImpl implements ProductService {
 
     private Product mapToProduct(ProductFetchDTO productFetchDTO) {
         Category category = new Category(1L, productFetchDTO.category());
-        return new Product(productFetchDTO.id(), productFetchDTO.title(), productFetchDTO.description(), productFetchDTO.price(), category , productFetchDTO.image());
+        return new Product(productFetchDTO.id(), productFetchDTO.title(), productFetchDTO.description(), productFetchDTO.price(), category, productFetchDTO.image());
     }
 
     @Override
@@ -80,13 +77,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getProductsByCategory(String categoryName) throws ProductNotFoundException {
-        List<ProductFetchDTO> productFetchDTOS = restTemplate.exchange(
-                url + "/category/" + categoryName,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<ProductFetchDTO>>() {}).getBody();
+        List<ProductFetchDTO> productFetchDTOS = restTemplate.exchange(url + "/category/" + categoryName, HttpMethod.GET, null, new ParameterizedTypeReference<List<ProductFetchDTO>>() {
+        }).getBody();
 
-        if(productFetchDTOS == null) {
+        if (productFetchDTOS == null) {
             throw new ProductNotFoundException("Products with category: " + categoryName + " not found");
         }
 
@@ -96,11 +90,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<String> getCategories() {
 
-        List<String> categories = restTemplate.exchange(
-                url + "/categories",
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<String>>() {}).getBody();
+        List<String> categories = restTemplate.exchange(url + "/categories", HttpMethod.GET, null, new ParameterizedTypeReference<List<String>>() {
+        }).getBody();
 
         assert categories != null;
 
@@ -110,11 +101,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getLimitedProducts(int limit) {
 
-        List<ProductFetchDTO> productFetchDTOS = restTemplate.exchange(
-                url + "?limit=" + limit,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<ProductFetchDTO>>() {}).getBody();
+        List<ProductFetchDTO> productFetchDTOS = restTemplate.exchange(url + "?limit=" + limit, HttpMethod.GET, null, new ParameterizedTypeReference<List<ProductFetchDTO>>() {
+        }).getBody();
 
         assert productFetchDTOS != null;
 
@@ -125,11 +113,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getSortedProducts(String sort) {
 
-        List<ProductFetchDTO> productFetchDTOS = restTemplate.exchange(
-                url + "?sort=" + sort,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<ProductFetchDTO>>() {}).getBody();
+        List<ProductFetchDTO> productFetchDTOS = restTemplate.exchange(url + "?sort=" + sort, HttpMethod.GET, null, new ParameterizedTypeReference<List<ProductFetchDTO>>() {
+        }).getBody();
 
         assert productFetchDTOS != null;
 
