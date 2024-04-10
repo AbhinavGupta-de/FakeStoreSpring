@@ -1,10 +1,34 @@
 package com.abhinavgpt.fakestorespring.models;
 
-public record Category(Long id, String name) {
-    public Category {
-        if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException("Category name cannot be null or empty");
-        }
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
+public class Category {
+
+    @Id
+    private long id;
+    private String name;
+
+    public Category(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }
 

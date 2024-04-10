@@ -30,7 +30,7 @@ public class ProductServiceImpl implements ProductService {
 
     private Product mapToProduct(ProductFetchDTO productFetchDTO) {
         Category category = new Category(1L, productFetchDTO.category());
-        return new Product(productFetchDTO.id(), productFetchDTO.title(), productFetchDTO.description(), productFetchDTO.price(), category, productFetchDTO.image());
+        return new Product(productFetchDTO.id(), productFetchDTO.title(), productFetchDTO.description(), productFetchDTO.price(), productFetchDTO.image(), category);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
 
 
     private ProductFetchDTO mapToProductFetchDTO(Product product) {
-        return new ProductFetchDTO(product.id(), product.title(), product.description(), product.price(), product.category().name(), product.imageUrl());
+        return new ProductFetchDTO(product.getId(), product.getName(), product.getDescription(), product.getPrice(), product.getCategory().getName(), product.getImage());
     }
 
 
@@ -65,7 +65,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product updateProduct(Product product) {
 
-        restTemplate.put(url + "/" + product.id(), mapToProductFetchDTO(product));
+        restTemplate.put(url + "/" + product.getId(), mapToProductFetchDTO(product));
 
         return product;
     }

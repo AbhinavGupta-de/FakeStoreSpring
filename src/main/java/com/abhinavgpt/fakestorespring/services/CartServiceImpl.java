@@ -151,8 +151,8 @@ public class CartServiceImpl implements CartService {
     }
 
     private CartRecieveDTO mapToCardDTO(Cart cart) {
-        List<ProductCartDTO> products = mapToProductDTO(cart.products());
-        return new CartRecieveDTO(cart.id(), cart.userId(), cart.date(), products);
+        List<ProductCartDTO> products = mapToProductDTO(cart.getProducts());
+        return new CartRecieveDTO(cart.getId(), cart.getUserId(), cart.getDate(), products);
 
     }
 
@@ -160,7 +160,7 @@ public class CartServiceImpl implements CartService {
         List<ProductCartDTO> productCartDTOList = new ArrayList<>();
 
         for (Product product : products) {
-            productCartDTOList.add(new ProductCartDTO(product.id(), 1));
+            productCartDTOList.add(new ProductCartDTO(product.getId(), 1));
         }
 
         return productCartDTOList;
