@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -33,7 +34,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     public void deleteCategory(String categoryName) {
-        categoryRepository.deleteByName(categoryName);
+        Optional<Category> category = categoryRepository.findByName(categoryName);
+        category.ifPresent(categoryRepository::delete);
     }
 
     public List<Category> getCategories() {

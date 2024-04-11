@@ -27,9 +27,16 @@ public class CategoryController {
         return categoryService.addCategory(category);
     }
 
-    @PatchMapping("/{categoryName}")
-    public void deleteCategory(@PathVariable String categoryName) {
-        categoryService.deleteCategory(categoryName);
+    @DeleteMapping("/{categoryName}")
+    public String deleteCategory(@PathVariable String categoryName) {
+        try {
+            categoryService.deleteCategory(categoryName);
+        } catch (Exception e) {
+            return "There was an error while deleting category";
+        }
+
+        return "Category deleted successfully";
+
     }
 
 }
