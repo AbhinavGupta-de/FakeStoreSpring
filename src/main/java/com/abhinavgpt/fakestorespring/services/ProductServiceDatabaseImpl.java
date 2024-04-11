@@ -22,7 +22,7 @@ public class ProductServiceDatabaseImpl implements ProductService {
 
     @Override
     public List<Product> getProducts() {
-       return productRepository.findAll();
+        return productRepository.findAll();
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.abhinavgpt.fakestorespring.services;
 
-import com.abhinavgpt.fakestorespring.dtos.CartRecieveDTO;
+import com.abhinavgpt.fakestorespring.dtos.CartReceiveDTO;
 import com.abhinavgpt.fakestorespring.dtos.ProductCartDTO;
 import com.abhinavgpt.fakestorespring.exceptions.CartNotFoundException;
 import com.abhinavgpt.fakestorespring.exceptions.ProductNotFoundException;
@@ -26,7 +26,7 @@ public class CartServiceImpl implements CartService {
         this.productService = productService;
     }
 
-    private Cart mapToCart(CartRecieveDTO cartRecieveDTO) {
+    private Cart mapToCart(CartReceiveDTO cartRecieveDTO) {
         List<Product> products = mapToProduct(cartRecieveDTO.products());
         return new Cart(cartRecieveDTO.id(), cartRecieveDTO.userId(), cartRecieveDTO.date(), products);
     }
@@ -51,12 +51,8 @@ public class CartServiceImpl implements CartService {
     @Override
     public List<Cart> getAllProducts() {
 
-        List<CartRecieveDTO> cartFetchDTO = restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<CartRecieveDTO>>() {
-                }).getBody();
+        List<CartReceiveDTO> cartFetchDTO = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<CartReceiveDTO>>() {
+        }).getBody();
 
         assert cartFetchDTO != null;
 
@@ -66,7 +62,7 @@ public class CartServiceImpl implements CartService {
     @Override
     public Cart getCart(long id) throws CartNotFoundException {
 
-        CartRecieveDTO cartRecieveDTO = restTemplate.getForObject(url + "/" + id, CartRecieveDTO.class);
+        CartReceiveDTO cartRecieveDTO = restTemplate.getForObject(url + "/" + id, CartReceiveDTO.class);
 
         if (cartRecieveDTO == null) {
             throw new CartNotFoundException("Cart with id " + id + " not found.");
@@ -77,12 +73,8 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public List<Cart> limitedCarts(long limit) {
-        List<CartRecieveDTO> cartFetchDTO = restTemplate.exchange(
-                url + "?limit=" + limit,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<CartRecieveDTO>>() {
-                }).getBody();
+        List<CartReceiveDTO> cartFetchDTO = restTemplate.exchange(url + "?limit=" + limit, HttpMethod.GET, null, new ParameterizedTypeReference<List<CartReceiveDTO>>() {
+        }).getBody();
 
         assert cartFetchDTO != null;
 
@@ -92,12 +84,8 @@ public class CartServiceImpl implements CartService {
     @Override
     public List<Cart> sortedCarts(String order) {
 
-        List<CartRecieveDTO> cartFetchDTO = restTemplate.exchange(
-                url + "?sort=" + order,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<CartRecieveDTO>>() {
-                }).getBody();
+        List<CartReceiveDTO> cartFetchDTO = restTemplate.exchange(url + "?sort=" + order, HttpMethod.GET, null, new ParameterizedTypeReference<List<CartReceiveDTO>>() {
+        }).getBody();
 
         assert cartFetchDTO != null;
 
@@ -108,12 +96,8 @@ public class CartServiceImpl implements CartService {
     @Override
     public List<Cart> inDateRange(String start, String end) {
 
-        List<CartRecieveDTO> cartFetchDTO = restTemplate.exchange(
-                url + "?startdate=" + start + "&enddate=" + end,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<CartRecieveDTO>>() {
-                }).getBody();
+        List<CartReceiveDTO> cartFetchDTO = restTemplate.exchange(url + "?startdate=" + start + "&enddate=" + end, HttpMethod.GET, null, new ParameterizedTypeReference<List<CartReceiveDTO>>() {
+        }).getBody();
 
         assert cartFetchDTO != null;
 
@@ -123,12 +107,8 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public List<Cart> userCart(long userId) {
-        List<CartRecieveDTO> cartFetchDTO = restTemplate.exchange(
-                url + "/user/" + userId,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<CartRecieveDTO>>() {
-                }).getBody();
+        List<CartReceiveDTO> cartFetchDTO = restTemplate.exchange(url + "/user/" + userId, HttpMethod.GET, null, new ParameterizedTypeReference<List<CartReceiveDTO>>() {
+        }).getBody();
 
         assert cartFetchDTO != null;
 
@@ -137,8 +117,8 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void addNewCart(Cart cart) {
-        CartRecieveDTO sendCart = mapToCardDTO(cart);
-        sendCart = restTemplate.postForObject(url, sendCart, CartRecieveDTO.class);
+        CartReceiveDTO sendCart = mapToCardDTO(cart);
+        sendCart = restTemplate.postForObject(url, sendCart, CartReceiveDTO.class);
 
 //        The cart could be returned to the user as well but no need to do that right now
 
@@ -146,13 +126,13 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void updateProduct(Cart cart) {
-        CartRecieveDTO sendCart = mapToCardDTO(cart);
+        CartReceiveDTO sendCart = mapToCardDTO(cart);
         restTemplate.put(url + "/" + sendCart.date(), sendCart);
     }
 
-    private CartRecieveDTO mapToCardDTO(Cart cart) {
+    private CartReceiveDTO mapToCardDTO(Cart cart) {
         List<ProductCartDTO> products = mapToProductDTO(cart.getProducts());
-        return new CartRecieveDTO(cart.getId(), cart.getUserId(), cart.getDate(), products);
+        return new CartReceiveDTO(cart.getId(), cart.getUserId(), cart.getDate(), products);
 
     }
 

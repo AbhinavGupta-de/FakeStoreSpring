@@ -1,7 +1,6 @@
 package com.abhinavgpt.fakestorespring.services;
 
 import com.abhinavgpt.fakestorespring.exceptions.ProductNotFoundException;
-import com.abhinavgpt.fakestorespring.models.Category;
 import com.abhinavgpt.fakestorespring.models.Product;
 
 import java.util.List;

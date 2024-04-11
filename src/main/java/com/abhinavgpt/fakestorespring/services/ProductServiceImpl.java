@@ -34,7 +34,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private Product mapToProduct(ProductFetchDTO productFetchDTO) {
-        Category category =  categoryService.getCategory(productFetchDTO.category());
+        Category category = categoryService.getCategory(productFetchDTO.category());
         return new Product(productFetchDTO.id(), productFetchDTO.title(), productFetchDTO.description(), productFetchDTO.price(), productFetchDTO.image(), category);
     }
 

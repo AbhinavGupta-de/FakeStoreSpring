@@ -6,56 +6,56 @@ import jakarta.persistence.OneToMany;
 
 import java.util.List;
 
- @Entity
+@Entity
 public class Cart {
 
-     @Id
-     private long id;
-     private long userId;
-     private String date;
-     @OneToMany
-     private List<Product> products;
+    @Id
+    private long id;
+    private long userId;
+    private String date;
+    @OneToMany
+    private List<Product> products;
 
-        public Cart(long id, long userId, String date, List<Product> products) {
-            this.id = id;
-            this.userId = userId;
-            this.date = date;
-            this.products = products;
-        }
+    public Cart(long id, long userId, String date, List<Product> products) {
+        this.id = id;
+        this.userId = userId;
+        this.date = date;
+        this.products = products;
+    }
 
-     public Cart() {
+    public Cart() {
 
-     }
+    }
 
-     public long getUserId() {
-         return userId;
-     }
+    public long getUserId() {
+        return userId;
+    }
 
-     public void setUserId(long userId) {
-         this.userId = userId;
-     }
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
 
-     public String getDate() {
-         return date;
-     }
+    public String getDate() {
+        return date;
+    }
 
-     public void setDate(String date) {
-         this.date = date;
-     }
+    public void setDate(String date) {
+        this.date = date;
+    }
 
-     public long getId() {
-         return id;
-     }
+    public long getId() {
+        return id;
+    }
 
-     public void setId(long id) {
-         this.id = id;
-     }
+    public void setId(long id) {
+        this.id = id;
+    }
 
-     public List<Product> getProducts() {
-         return products;
-     }
+    public List<Product> getProducts() {
+        return products;
+    }
 
-     public void setProducts(List<Product> products) {
-         this.products = products;
-     }
- }
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+}

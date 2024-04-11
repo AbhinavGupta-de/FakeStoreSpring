@@ -7,26 +7,26 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class Product {
 
-        @Id
-        private long id;
-        private String name;
-        private String description;
-        private double price;
-        private String image;
-        @ManyToOne
-        private Category category;
+    @Id
+    private long id;
+    private String name;
+    private String description;
+    private double price;
+    private String image;
+    @ManyToOne
+    private Category category;
 
-        public Product() {
-        }
+    public Product() {
+    }
 
-        public Product(long id, String name, String description, double price, String image, Category category) {
-            this.id = id;
-            this.name = name;
-            this.description = description;
-            this.price = price;
-            this.image = image;
-            this.category = category;
-        }
+    public Product(long id, String name, String description, double price, String image, Category category) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.image = image;
+        this.category = category;
+    }
 
     public long getId() {
         return id;
