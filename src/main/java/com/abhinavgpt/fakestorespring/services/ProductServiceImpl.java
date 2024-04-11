@@ -16,6 +16,11 @@ public class ProductServiceImpl implements ProductService {
 
     private final String url = "https://fakestoreapi.com/products";
     private final RestTemplate restTemplate = new RestTemplate();
+    private final CategoryService categoryService;
+
+    public ProductServiceImpl(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
 
     @Override
     public List<Product> getProducts() {
@@ -29,7 +34,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private Product mapToProduct(ProductFetchDTO productFetchDTO) {
-        Category category = new Category(1L, productFetchDTO.category());
+        Category category =  categoryService.getCategory(productFetchDTO.category());
         return new Product(productFetchDTO.id(), productFetchDTO.title(), productFetchDTO.description(), productFetchDTO.price(), productFetchDTO.image(), category);
     }
 
@@ -85,17 +90,6 @@ public class ProductServiceImpl implements ProductService {
         }
 
         return productFetchDTOS.stream().map(this::mapToProduct).toList();
-    }
-
-    @Override
-    public List<String> getCategories() {
-
-        List<String> categories = restTemplate.exchange(url + "/categories", HttpMethod.GET, null, new ParameterizedTypeReference<List<String>>() {
-        }).getBody();
-
-        assert categories != null;
-
-        return categories;
     }
 
     @Override

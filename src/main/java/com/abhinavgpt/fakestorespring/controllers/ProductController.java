@@ -22,11 +22,6 @@ public class ProductController {
         return productService.getProducts();
     }
 
-    @GetMapping("/categories")
-    public List<String> getCategories() {
-        return productService.getCategories();
-    }
-
     @GetMapping("/limited/{limit}")
     public List<Product> getLimitedProducts(@PathVariable int limit) {
         return productService.getLimitedProducts(limit);
@@ -47,18 +42,18 @@ public class ProductController {
         return productService.getProduct(id);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public String deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
         return "Product deleted successfully";
     }
 
-    @PostMapping("/add")
+    @PostMapping("")
     public Product addProduct(@RequestBody Product product) {
         return productService.addProduct(product);
     }
 
-    @PutMapping("/update")
+    @PutMapping("")
     public Product updateProduct(@RequestBody Product product) {
         return productService.updateProduct(product);
     }
