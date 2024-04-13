@@ -1,8 +1,9 @@
-package com.abhinavgpt.fakestorespring.services;
+package com.abhinavgpt.fakestorespring.services.productservice;
 
 import com.abhinavgpt.fakestorespring.exceptions.ProductNotFoundException;
 import com.abhinavgpt.fakestorespring.models.Product;
 import com.abhinavgpt.fakestorespring.repository.ProductRepository;
+import com.abhinavgpt.fakestorespring.services.categoryservice.CategoryService;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 

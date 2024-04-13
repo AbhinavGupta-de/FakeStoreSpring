@@ -2,7 +2,7 @@ package com.abhinavgpt.fakestorespring.controllers;
 
 import com.abhinavgpt.fakestorespring.exceptions.CartNotFoundException;
 import com.abhinavgpt.fakestorespring.models.Cart;
-import com.abhinavgpt.fakestorespring.services.CartService;
+import com.abhinavgpt.fakestorespring.services.cartservice.CartService;
 import jakarta.websocket.server.PathParam;
 import org.springframework.web.bind.annotation.*;
 

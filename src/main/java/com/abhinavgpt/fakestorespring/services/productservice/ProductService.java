@@ -1,4 +1,4 @@
-package com.abhinavgpt.fakestorespring.services;
+package com.abhinavgpt.fakestorespring.services.productservice;
 
 import com.abhinavgpt.fakestorespring.exceptions.ProductNotFoundException;
 import com.abhinavgpt.fakestorespring.models.Product;

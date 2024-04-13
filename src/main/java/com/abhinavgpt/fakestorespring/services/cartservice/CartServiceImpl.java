@@ -1,4 +1,4 @@
-package com.abhinavgpt.fakestorespring.services;
+package com.abhinavgpt.fakestorespring.services.cartservice;
 
 import com.abhinavgpt.fakestorespring.dtos.CartReceiveDTO;
 import com.abhinavgpt.fakestorespring.dtos.ProductCartDTO;
@@ -6,6 +6,7 @@ import com.abhinavgpt.fakestorespring.exceptions.CartNotFoundException;
 import com.abhinavgpt.fakestorespring.exceptions.ProductNotFoundException;
 import com.abhinavgpt.fakestorespring.models.Cart;
 import com.abhinavgpt.fakestorespring.models.Product;
+import com.abhinavgpt.fakestorespring.services.productservice.ProductService;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;

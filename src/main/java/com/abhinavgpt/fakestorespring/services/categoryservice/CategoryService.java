@@ -1,4 +1,4 @@
-package com.abhinavgpt.fakestorespring.services;
+package com.abhinavgpt.fakestorespring.services.categoryservice;
 
 import com.abhinavgpt.fakestorespring.models.Category;
 

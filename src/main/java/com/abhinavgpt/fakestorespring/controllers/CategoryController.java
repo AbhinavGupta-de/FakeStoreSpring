@@ -1,7 +1,7 @@
 package com.abhinavgpt.fakestorespring.controllers;
 
 import com.abhinavgpt.fakestorespring.models.Category;
-import com.abhinavgpt.fakestorespring.services.CategoryService;
+import com.abhinavgpt.fakestorespring.services.categoryservice.CategoryService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

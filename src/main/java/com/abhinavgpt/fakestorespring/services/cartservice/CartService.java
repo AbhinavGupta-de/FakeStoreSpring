@@ -1,4 +1,4 @@
-package com.abhinavgpt.fakestorespring.services;
+package com.abhinavgpt.fakestorespring.services.cartservice;
 
 import com.abhinavgpt.fakestorespring.exceptions.CartNotFoundException;
 import com.abhinavgpt.fakestorespring.models.Cart;

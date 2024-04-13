@@ -1,9 +1,10 @@
-package com.abhinavgpt.fakestorespring.services;
+package com.abhinavgpt.fakestorespring.services.productservice;
 
 import com.abhinavgpt.fakestorespring.dtos.ProductFetchDTO;
 import com.abhinavgpt.fakestorespring.exceptions.ProductNotFoundException;
 import com.abhinavgpt.fakestorespring.models.Category;
 import com.abhinavgpt.fakestorespring.models.Product;
+import com.abhinavgpt.fakestorespring.services.categoryservice.CategoryService;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;

@@ -2,7 +2,7 @@ package com.abhinavgpt.fakestorespring.controllers;
 
 import com.abhinavgpt.fakestorespring.exceptions.ProductNotFoundException;
 import com.abhinavgpt.fakestorespring.models.Product;
-import com.abhinavgpt.fakestorespring.services.ProductService;
+import com.abhinavgpt.fakestorespring.services.productservice.ProductService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
