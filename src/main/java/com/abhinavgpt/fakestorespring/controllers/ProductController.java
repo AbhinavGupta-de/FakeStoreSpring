@@ -1,5 +1,6 @@
 package com.abhinavgpt.fakestorespring.controllers;
 
+import com.abhinavgpt.fakestorespring.exceptions.CategoryNotFoundException;
 import com.abhinavgpt.fakestorespring.exceptions.ProductNotFoundException;
 import com.abhinavgpt.fakestorespring.models.Product;
 import com.abhinavgpt.fakestorespring.services.productservice.ProductService;
@@ -49,7 +50,7 @@ public class ProductController {
     }
 
     @PostMapping("")
-    public Product addProduct(@RequestBody Product product) {
+    public Product addProduct(@RequestBody Product product) throws CategoryNotFoundException {
         return productService.addProduct(product);
     }
 

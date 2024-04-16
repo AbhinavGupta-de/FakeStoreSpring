@@ -1,5 +1,6 @@
 package com.abhinavgpt.fakestorespring.services.productservice;
 
+import com.abhinavgpt.fakestorespring.exceptions.CategoryNotFoundException;
 import com.abhinavgpt.fakestorespring.exceptions.ProductNotFoundException;
 import com.abhinavgpt.fakestorespring.models.Product;
 
@@ -10,7 +11,7 @@ public interface ProductService {
 
     public Product getProduct(Long id) throws ProductNotFoundException;
 
-    public Product addProduct(Product product);
+    public Product addProduct(Product product) throws CategoryNotFoundException;
 
     public Product updateProduct(Product product);
 

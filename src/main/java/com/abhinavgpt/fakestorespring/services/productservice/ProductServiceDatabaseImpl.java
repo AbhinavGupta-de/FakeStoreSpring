@@ -1,6 +1,8 @@
 package com.abhinavgpt.fakestorespring.services.productservice;
 
+import com.abhinavgpt.fakestorespring.exceptions.CategoryNotFoundException;
 import com.abhinavgpt.fakestorespring.exceptions.ProductNotFoundException;
+import com.abhinavgpt.fakestorespring.models.Category;
 import com.abhinavgpt.fakestorespring.models.Product;
 import com.abhinavgpt.fakestorespring.repository.ProductRepository;
 import com.abhinavgpt.fakestorespring.services.categoryservice.CategoryService;
@@ -32,7 +34,13 @@ public class ProductServiceDatabaseImpl implements ProductService {
     }
 
     @Override
-    public Product addProduct(Product product) {
+    public Product addProduct(Product product) throws CategoryNotFoundException {
+        Category category = categoryService.getCategory(product.getCategory().getName());
+        if (category == null && product.getCategory().getName() != null) {
+            category = categoryService.addCategory(product.getCategory());
+        } else {
+            throw new CategoryNotFoundException("Category not found");
+        }
         return productRepository.save(product);
     }
 
