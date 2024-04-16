@@ -37,7 +37,7 @@ public class ProductServiceDatabaseImpl implements ProductService {
     public Product addProduct(Product product) throws CategoryNotFoundException {
         Category category = categoryService.getCategory(product.getCategory().getName());
         if (category == null && product.getCategory().getName() != null) {
-            category = categoryService.addCategory(product.getCategory());
+            categoryService.addCategory(product.getCategory());
         } else {
             throw new CategoryNotFoundException("Category not found");
         }
