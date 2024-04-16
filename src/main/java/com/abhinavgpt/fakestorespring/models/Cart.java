@@ -1,42 +1,61 @@
 package com.abhinavgpt.fakestorespring.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
+import java.util.List;
+
+@Entity
 public class Cart {
 
-    private Long id;
-    private Product product;
-    private int quantity;
+    @Id
+    private long id;
+    private long userId;
+    private String date;
+    @OneToMany
+    private List<Product> products;
+
+    public Cart(long id, long userId, String date, List<Product> products) {
+        this.id = id;
+        this.userId = userId;
+        this.date = date;
+        this.products = products;
+    }
 
     public Cart() {
+
     }
 
-    public Cart(Long id, Product product, int quantity) {
-        this.id = id;
-        this.product = product;
-        this.quantity = quantity;
+    public long getUserId() {
+        return userId;
     }
 
-    public Long getId() {
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public Product getProduct() {
-        return product;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
 }

@@ -1,30 +1,26 @@
 package com.abhinavgpt.fakestorespring.controllers;
 
+import com.abhinavgpt.fakestorespring.exceptions.CategoryNotFoundException;
+import com.abhinavgpt.fakestorespring.exceptions.ProductNotFoundException;
 import com.abhinavgpt.fakestorespring.models.Product;
-import com.abhinavgpt.fakestorespring.services.ProductService;
-import jakarta.websocket.server.PathParam;
+import com.abhinavgpt.fakestorespring.services.productservice.ProductService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/products")
+@RequestMapping("/products")
 public class ProductController {
 
-    private ProductService productService;
+    private final ProductService productService;
 
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public List<Product> getAllProducts() {
         return productService.getProducts();
-    }
-
-    @GetMapping("/categories")
-    public List<String> getCategories() {
-        return productService.getCategories();
     }
 
     @GetMapping("/limited/{limit}")
@@ -38,27 +34,27 @@ public class ProductController {
     }
 
     @GetMapping("/category/{categoryName}")
-    public List<Product> getProductsByCategory(@PathVariable String categoryName) {
+    public List<Product> getProductsByCategory(@PathVariable String categoryName) throws ProductNotFoundException {
         return productService.getProductsByCategory(categoryName);
     }
 
     @GetMapping("/{id}")
-    public Product getProduct(@PathVariable Long id) {
+    public Product getProduct(@PathVariable Long id) throws ProductNotFoundException {
         return productService.getProduct(id);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public String deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
         return "Product deleted successfully";
     }
 
-    @PostMapping("/add")
-    public Product addProduct(@RequestBody Product product) {
+    @PostMapping("")
+    public Product addProduct(@RequestBody Product product) throws CategoryNotFoundException {
         return productService.addProduct(product);
     }
 
-    @PutMapping("/update")
+    @PutMapping("")
     public Product updateProduct(@RequestBody Product product) {
         return productService.updateProduct(product);
     }
