@@ -17,31 +17,28 @@ public class CategoryServiceImpl implements CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
+    @Override
     public List<String> getCategoryNames() {
         return categoryRepository.findAll().stream().map(Category::getName).filter(Objects::nonNull).toList();
     }
 
+    @Override
     public Category getCategory(String categoryName) {
         return categoryRepository.findByName(categoryName).orElse(null);
     }
 
+    @Override
     public Category addCategory(Category category) {
         return categoryRepository.save(category);
     }
 
-    public Category updateCategory(Category category) {
-        return categoryRepository.save(category);
-    }
-
+    @Override
     public void deleteCategory(String categoryName) {
         Optional<Category> category = categoryRepository.findByName(categoryName);
         category.ifPresent(categoryRepository::delete);
     }
 
-    public List<Category> getCategories() {
-        return categoryRepository.findAll();
-    }
-
+    @Override
     public Category getCategoryById(Long id) {
         return categoryRepository.findById(id).orElse(null);
     }
