@@ -117,18 +117,17 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public void addNewCart(Cart cart) {
+    public Cart addNewCart(Cart cart) {
         CartReceiveDTO sendCart = mapToCardDTO(cart);
         sendCart = restTemplate.postForObject(url, sendCart, CartReceiveDTO.class);
-
-//        The cart could be returned to the user as well but no need to do that right now
-
+        return sendCart != null ? mapToCart(sendCart) : null;
     }
 
     @Override
-    public void updateProduct(Cart cart) {
+    public Cart updateCart(Cart cart) {
         CartReceiveDTO sendCart = mapToCardDTO(cart);
         restTemplate.put(url + "/" + sendCart.date(), sendCart);
+        return cart;
     }
 
     private CartReceiveDTO mapToCardDTO(Cart cart) {

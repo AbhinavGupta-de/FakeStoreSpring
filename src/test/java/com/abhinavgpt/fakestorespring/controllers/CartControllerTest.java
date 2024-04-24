@@ -9,13 +9,11 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -48,8 +46,7 @@ class CartControllerTest {
         Cart cartR = null;
         try {
             cartR = cartController.getCart(1L);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -113,7 +110,7 @@ class CartControllerTest {
 
         cartController.updateProduct(cart);
 
-        Mockito.verify(cartService, Mockito.times(1)).updateProduct(cart);
+        Mockito.verify(cartService, Mockito.times(1)).updateCart(cart);
     }
 
     @Test

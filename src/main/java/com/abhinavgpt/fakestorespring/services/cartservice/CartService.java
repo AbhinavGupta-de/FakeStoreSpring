@@ -19,9 +19,9 @@ public interface CartService {
 
     List<Cart> userCart(long userId);
 
-    void addNewCart(Cart cart);
+    Cart addNewCart(Cart cart);
 
-    void updateProduct(Cart cart);
+    Cart updateCart(Cart cart);
 
     void deleteCart(long id);
 
