@@ -65,7 +65,7 @@ public class CartController {
     public String updateProduct(@RequestBody Cart cart) {
 
         try {
-            cartService.updateProduct(cart);
+            cartService.updateCart(cart);
         } catch (Exception e) {
             return "There was an error while updating the product";
         }
