@@ -6,7 +6,7 @@ import com.abhinavgpt.fakestorespring.models.Product;
 
 import java.util.List;
 
-public interface ProductService {
+public sealed interface ProductService permits ProductServiceImpl, ProductServiceDatabaseImpl {
     public List<Product> getProducts();
 
     public Product getProduct(Long id) throws ProductNotFoundException;

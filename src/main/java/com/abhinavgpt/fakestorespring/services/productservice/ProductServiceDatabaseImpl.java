@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @Primary
-public class ProductServiceDatabaseImpl implements ProductService {
+final class ProductServiceDatabaseImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final CategoryService categoryService;

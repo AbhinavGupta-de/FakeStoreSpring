@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Primary;
 import java.util.List;
 
 @Primary
-public class CartServiceDatabaseImpl implements CartService {
+final class CartServiceDatabaseImpl implements CartService {
 
     private final CartRepository cartRepository;
 

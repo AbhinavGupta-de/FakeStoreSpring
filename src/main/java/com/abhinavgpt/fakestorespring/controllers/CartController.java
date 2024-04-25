@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/cart")
-public class CartController {
+public final class CartController {
 
     private final CartService cartService;
 

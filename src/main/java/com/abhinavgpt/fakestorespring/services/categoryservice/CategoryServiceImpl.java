@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class CategoryServiceImpl implements CategoryService {
+final class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
 

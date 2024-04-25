@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/categories")
-public class CategoryController {
+public final class CategoryController {
 
     private final CategoryService categoryService;
 

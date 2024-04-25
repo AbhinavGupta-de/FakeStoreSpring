@@ -5,7 +5,7 @@ import com.abhinavgpt.fakestorespring.models.Cart;
 
 import java.util.List;
 
-public interface CartService {
+public sealed interface CartService permits  CartServiceDatabaseImpl, CartServiceImpl{
 
     List<Cart> getAllProducts();
 

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class CartServiceImpl implements CartService {
+final class CartServiceImpl implements CartService {
 
     private final String url = "https://fakestoreapi.com/carts";
     private final RestTemplate restTemplate = new RestTemplate();

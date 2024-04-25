@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 @Service
-public class ProductServiceImpl implements ProductService {
+final class ProductServiceImpl implements ProductService {
 
     private final String url = "https://fakestoreapi.com/products";
     private final RestTemplate restTemplate = new RestTemplate();

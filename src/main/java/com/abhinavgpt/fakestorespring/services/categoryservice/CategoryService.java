@@ -4,7 +4,7 @@ import com.abhinavgpt.fakestorespring.models.Category;
 
 import java.util.List;
 
-public interface CategoryService {
+public sealed interface CategoryService permits CategoryServiceImpl {
 
     public List<String> getCategoryNames();
 
