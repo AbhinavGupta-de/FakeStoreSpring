@@ -35,10 +35,12 @@ final class ProductServiceDatabaseImpl implements ProductService {
 
     @Override
     public Product addProduct(Product product) throws CategoryNotFoundException {
-        Category category = categoryService.getCategory(product.getCategory().getName());
+        long id = product.getCategory().getId();
+        Category category = categoryService.getCategoryById(id);
+        System.out.println(category);
         if (category == null && product.getCategory().getName() != null) {
             categoryService.addCategory(product.getCategory());
-        } else {
+        } else if(category == null){
             throw new CategoryNotFoundException("Category not found");
         }
         return productRepository.save(product);
